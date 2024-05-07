@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.facebook",
-    "tailwind",
+    "django_tailwind_cli",
     "theme",
     "django_browser_reload",
     "crispy_forms",
@@ -151,12 +151,25 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
+STATICFILES_DIRS = [
+    BASE_DIR / "theme" / "static_src" / "src",
+    BASE_DIR / "party" / "static"
+]
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
+
+# django-tailwind-cli
+# https://django-tailwind-cli.andrich.me/#installation
+
+TAILWIND_CLI_VERSION = "3.4.1"
+TAILWIND_CLI_PATH = BASE_DIR / "bin/tailwindcss"
+TAILWIND_CLI_AUTOMATIC_DOWNLOAD = False
+TAILWIND_CLI_SRC_CSS = BASE_DIR / "theme/static_src/src/styles.css"
+TAILWIND_CLI_DIST_CSS = "tailwind.css"
+TAILWIND_CLI_CONFIG_FILE = "theme/static_src/tailwind.config.js"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -164,8 +177,6 @@ STORAGES = {
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "party.CustomUser"
-
-TAILWIND_APP_NAME = "theme"
 
 INTERNAL_IPS = [
     "127.0.0.1",
