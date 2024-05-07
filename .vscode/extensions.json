@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "batisteo.vscode-django",
+        "bradlc.vscode-tailwindcss",
+        "zainchen.json",
+        "qwtel.sqlite-viewer"
+    ]
+}
