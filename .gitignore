@@ -162,4 +162,4 @@ cython_debug/
 cypress.env.json
 
 # TailwindCSS CLI
-bin/tailwindcss
+bin/

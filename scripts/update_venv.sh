@@ -1,5 +1,4 @@
 #!/bin/bash
-rm -rf $PWD/venv
+rm -rf venv
 python3.12 -m venv venv
-source "$PWD/../venv/bin/python"
-pip install -r requirements.txt
+venv/bin/pip install -r requirements.txt

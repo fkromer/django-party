@@ -1,6 +1,6 @@
 crispy-bootstrap4==2022.1
 Django==4.2.7
-django-allauth==0.58.2
+django-allauth[socialaccount]==0.58.2
 django-tailwind-cli==2.11.1
 django-browser-reload==1.12.1
 dj-database-url==2.1.0

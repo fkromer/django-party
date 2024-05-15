@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.facebook",
     "django_tailwind_cli",
+    "whitenoise.runserver_nostatic",
     "django_browser_reload",
     "crispy_forms",
     "crispy_bootstrap4",
@@ -163,8 +164,8 @@ STORAGES = {
 # https://django-tailwind-cli.andrich.me/#installation
 
 TAILWIND_CLI_VERSION = "3.4.1"
-TAILWIND_CLI_PATH = BASE_DIR / "bin/tailwindcss"
-TAILWIND_CLI_AUTOMATIC_DOWNLOAD = False
+TAILWIND_CLI_PATH = BASE_DIR / "bin"
+TAILWIND_CLI_AUTOMATIC_DOWNLOAD = True
 TAILWIND_CLI_SRC_CSS = BASE_DIR / "party/static/party/css/styles.css"
 TAILWIND_CLI_DIST_CSS = "tailwind.css"
 
@@ -185,10 +186,36 @@ LOGIN_REDIRECT_URL = "page_party_list"  # where to redirect after login
 LOGIN_URL = "party_login"  # where to redirect when login is required to access a view
 
 
-AUTHENTICATION_BACKENDS = ("allauth.account.auth_backends.AuthenticationBackend",)
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# django-allauth
+# https://docs.allauth.org/en/latest/account/configuration.html
+# https://docs.allauth.org/en/latest/socialaccount/configuration.html
+# https://docs.allauth.org/en/latest/socialaccount/provider_configuration.html#provider-configuration
+# https://docs.allauth.org/en/latest/socialaccount/providers/google.html#google
+# https://docs.allauth.org/en/latest/socialaccount/providers/facebook.html#facebook
 
 SITE_ID = 1  # needs to match the Site ID in the admin
 ACCOUNT_EMAIL_VERIFICATION = "none"  # no email verification needed
 SOCIALACCOUNT_LOGIN_ON_GET = True  # skip additional confirm page, less secure
 ACCOUNT_LOGOUT_ON_GET = True  # skip the confirm logout page
 ACCOUNT_UNIQUE_EMAIL = True
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APP": {
+            "client_id": os.environ.get("GOOGLE_AUTH_CLIENT_ID", default=""),
+            "secret": os.environ.get("GOOGLE_AUTH_CLIENT_SECRET", default=""),
+            "key": "",
+        },
+    },
+    "facebook": {
+        "APP": {
+            "client_id": os.environ.get("FACEBOOK_AUTH_CLIENT_ID", default=""),
+            "secret": os.environ.get("FACEBOOK_AUTH_CLIENT_SECRET", default=""),
+            "key": "",
+        },
+    },
+}

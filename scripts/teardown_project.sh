@@ -1,4 +1,5 @@
 #!/bin/bash
-rm -rf $PWD/venv
+rm -rf venv
+rm .env
 rm db.sqlite3
-rm bin/tailwindcss
+find bin -type f -name 'tailwind*' -delete
